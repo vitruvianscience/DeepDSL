@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package deepdsl;
+
+
+// Define a symbolic variable for the computation graph
+message Variable {
+    repeated uint64 shape = 0 [packed = true];
+    string dtype = 1;
+}
+
+message Dimension {
+    repeated uint64 coord = 0 [packed = true];
+}
+
+// Define a generic multidimensional array - protobuf can only do single arrays so we need to send coordinates
+message Tensor {
+    repeated float values = 0 [packed = true];
+    repeated Dimension coords = 1 [packed = true];
+    string dtype = 2;
+}
